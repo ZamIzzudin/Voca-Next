@@ -1,7 +1,7 @@
 /** @format */
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useStore from "../utils/store";
 
 import Container from "@/components/extras/Container";
@@ -20,12 +20,8 @@ const dummyProduct = {
 const dummyList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 export default function Home() {
-  const { products, getProducts } = useStore();
+  const { products } = useStore();
   const [category, setCategory] = useState("Rekomendasi");
-
-  useEffect(() => {
-    getProducts();
-  }, []);
 
   return (
     <main className="overflow-x-hidden text-white bg-bg">
@@ -42,7 +38,7 @@ export default function Home() {
                   category === "Rekomendasi"
                     ? "bg-white text-black"
                     : "bg-transparent text-white"
-                } py-3 px-4 text-left rounded`}
+                } py-3 px-4 text-left rounded cursor-pointer`}
                 onClick={() => setCategory("Rekomendasi")}
               >
                 Rekomendasi
@@ -52,7 +48,7 @@ export default function Home() {
                   category === "Mobile"
                     ? "bg-white text-black"
                     : "bg-transparent text-white"
-                }  py-3 px-4 text-left rounded`}
+                }  py-3 px-4 text-left rounded cursor-pointer`}
                 onClick={() => setCategory("Mobile")}
               >
                 Mobile Game
@@ -62,16 +58,19 @@ export default function Home() {
                   category === "PC"
                     ? "bg-white text-black"
                     : "bg-transparent text-white"
-                } py-3 px-4 text-left rounded`}
+                } py-3 px-4 text-left rounded cursor-pointer`}
                 onClick={() => setCategory("PC")}
               >
                 PC Game
               </span>
             </Flex>
           </Flex>
-          <Flex wrap="wrap" gap="4">
+          <Flex wrap="wrap" gap="5" py="4">
             {dummyList.map((product, index) => (
-              <GameCard data={dummyProduct} key={index} />
+              <GameCard
+                data={{ ...dummyProduct, id: products[0]?.id }}
+                key={index}
+              />
             ))}
           </Flex>
         </Grid>

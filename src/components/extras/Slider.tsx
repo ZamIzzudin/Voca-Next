@@ -30,7 +30,7 @@ export function BannerSlider() {
       className="calc(100vw - (100vw - 100%))"
     >
       {data.map((item) => (
-        <SwiperSlide style={{ width: "calc(100vw - 15rem)" }}>
+        <SwiperSlide style={{ width: "calc(100vw - 20rem)" }}>
           <Box className="bg-gray-500 rounded-xl" height="400px">
             Slide {item}
           </Box>

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Box, Text, Flex } from "@radix-ui/themes";
+import { useRouter } from "next/navigation";
 
 interface DiamondCardProps {
   label: string;
@@ -45,14 +46,16 @@ export function BannerCard({ data }: { data: DiamondCardProps }) {
 }
 
 export function GameCard({ data }: { data: any }) {
+  const { push } = useRouter();
   return (
     <Flex
-      className="grow"
+      className="grow cursor-pointer"
       justify="end"
       align="center"
       direction="column"
       height="180px"
       position="relative"
+      onClick={() => push(`/details/${data.id}`)}
     >
       <Image
         src={data.imageUrl}

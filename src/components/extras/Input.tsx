@@ -3,12 +3,12 @@
 import { Box, Flex, Select } from "@radix-ui/themes";
 import { ReactElement, useState } from "react";
 
-interface RequiredState {
+interface InputRequiredState {
   value: string | number;
   handler: (value: any) => void;
 }
 
-interface OpsionalState {
+interface InputOpsionalState {
   type: string;
   placeholder: string;
   icon: null | ReactElement;
@@ -20,9 +20,9 @@ interface OpsionalState {
   };
 }
 
-interface InputState extends RequiredState, OpsionalState {}
+interface InputState extends InputRequiredState, InputOpsionalState {}
 
-const defaultState: OpsionalState = {
+const inputDefaultState: InputOpsionalState = {
   type: "text",
   placeholder: "",
   icon: null,
@@ -31,7 +31,7 @@ const defaultState: OpsionalState = {
   action: null,
 };
 
-InputField.defaultProps = defaultState;
+InputField.defaultProps = inputDefaultState;
 
 export function InputField({
   type,
@@ -61,7 +61,7 @@ export function InputField({
       />
       {action && (
         <button
-          className="text-sm flex bg-white text-bg absolute right-0 top-0 bottom-0 justify-center items-center px-4 rounded-r-xl"
+          className="text-sm font-medium flex bg-white text-bg absolute right-0 top-0 bottom-0 justify-center items-center px-4 rounded-r-xl"
           onClick={() => action.handler()}
         >
           {action.label}
@@ -71,25 +71,28 @@ export function InputField({
   );
 }
 
-export function DropDown({ data }: { data: any }) {
+interface DropDownState {
+  id: string;
+  label: string;
+  prop: null | ReactElement;
+}
+
+export function DropDown({ data }: { data: DropDownState[] }) {
   const [value, setValue] = useState("0");
 
   return (
     <Select.Root value={value} onValueChange={setValue}>
-      <Select.Trigger className="text-white bg-item border-0 shadow-transparent">
+      <Select.Trigger className="text-white" variant="ghost">
         <Flex as="span" align="center" gap="2">
           {data[parseInt(value)]?.prop && data[parseInt(value)].prop}
           {data[parseInt(value)]?.label}
         </Flex>
       </Select.Trigger>
-      <Select.Content
-        position="popper"
-        className="text-white bg-item border-0 shadow-transparent"
-      >
+      <Select.Content position="popper" className="text-white bg-item">
         {data.map((item: any, index: number) => (
           <Select.Item value={index.toString()}>
             {item.prop ? (
-              <Flex gap="2">
+              <Flex gap="2" align="center" justify="center">
                 {item.prop}
                 {item.label}
               </Flex>

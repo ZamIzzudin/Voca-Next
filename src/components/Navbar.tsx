@@ -7,17 +7,20 @@ import { IoSearch } from "react-icons/io5";
 import { HiOutlineHome } from "react-icons/hi";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import { InputField, DropDown } from "./extras/Input";
+import useStore from "@/utils/store";
 import Container from "./extras/Container";
 import Logo from "@/assets/logo.png";
 import ID from "@/assets/id.svg";
 import US from "@/assets/us.svg";
 
 export default function Navbar() {
+  const { products, getProducts } = useStore();
   const [search, setSearch] = useState("");
+
   const countries = [
     {
       id: "id",
@@ -30,6 +33,12 @@ export default function Navbar() {
       prop: <Image src={US} alt="US Flag" width={15} />,
     },
   ];
+
+  useEffect(() => {
+    if (products.length === 0) {
+      getProducts();
+    }
+  }, []);
 
   return (
     <nav className="sticky top-0 left-0 w-full z-50 bg-item text-white">

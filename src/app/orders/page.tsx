@@ -3,7 +3,8 @@
 "use client";
 
 import { useState } from "react";
-import { Heading, Text, Flex } from "@radix-ui/themes";
+import { Heading, Text, Flex, Box } from "@radix-ui/themes";
+import Image from "next/image";
 import Link from "next/link";
 
 import OrderBanner from "@/components/OrderBanner";
@@ -13,6 +14,7 @@ import { OrderCard } from "@/components/extras/Card";
 
 import { IoSearch } from "react-icons/io5";
 import Mole from "@/assets/ml_icon.jpg";
+import NotFound from "@/assets/not_found.png";
 
 const dummyOrder = {
   gameName: "Mobile Legend",
@@ -24,7 +26,7 @@ const dummyOrder = {
   date: "24 Agustus 2023, 14:08",
 };
 
-const dummyList = [1, 2, 3];
+const dummyList: any[] = [1, 2, 3, 4];
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
@@ -59,11 +61,35 @@ export default function Orders() {
         </section>
         <section className="my-16">
           <Heading size="8">Riwayat Pesanan</Heading>
-          <Flex gap="4" direction="column" mt="4">
-            {dummyList.map((order) => (
-              <OrderCard data={dummyOrder} />
-            ))}
-          </Flex>
+          {dummyList.length === 0 ? (
+            <Flex direction="column" align="center" justify="center">
+              <Flex
+                direction="column"
+                align="center"
+                justify="center"
+                gap="4"
+                mt="9"
+                maxWidth="25%"
+              >
+                <Image
+                  src={NotFound}
+                  alt="not found"
+                  width={250}
+                  height={250}
+                />
+                <Text align="center" weight="medium">
+                  Produk belum bisa ditampilkan, silakan isi nomor HP terlebih
+                  dahulu
+                </Text>
+              </Flex>
+            </Flex>
+          ) : (
+            <Flex gap="4" direction="column" mt="4">
+              {dummyList?.map((order) => (
+                <OrderCard data={dummyOrder} />
+              ))}
+            </Flex>
+          )}{" "}
         </section>
       </Container>
     </main>
