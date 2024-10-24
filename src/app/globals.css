@@ -1,3 +1,5 @@
+/** @format */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,6 +16,10 @@
   }
 }
 
+.rt-SelectTrigger:where(.rt-variant-surface) {
+  box-shadow: none !important;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -24,4 +30,17 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.swiper-pagination-bullet {
+  width: 80px !important;
+  height: 8px !important;
+  opacity: 1 !important;
+  border-radius: 4px !important;
+  background: #eaeaea !important;
+  transition: 0.3s !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #282828 !important;
 }

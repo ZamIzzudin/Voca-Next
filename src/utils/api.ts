@@ -1,7 +1,20 @@
 /** @format */
-
 export default (() => {
-  const BASE_URL = "";
+  const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
-  return;
+  async function getProducts() {
+    try {
+      const url = `${BASE_URL}/products`;
+      const response = await fetch(url);
+
+      return response.json();
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
+  }
+
+  return {
+    getProducts,
+  };
 })();
