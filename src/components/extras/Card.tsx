@@ -3,8 +3,6 @@
 import Image from "next/image";
 import { Box, Text, Flex } from "@radix-ui/themes";
 
-import MoleIcon from "@/assets/ml_icon.jpg";
-
 interface DiamondCardProps {
   label: string;
   gameName: string;
@@ -47,11 +45,6 @@ export function BannerCard({ data }: { data: DiamondCardProps }) {
 }
 
 export function GameCard({ data }: { data: any }) {
-  const dummy = {
-    imageUrl: MoleIcon,
-    label: "Mobile Legend Bang-Bang",
-    developer: "Montoon",
-  };
   return (
     <Flex
       className="grow"
@@ -62,8 +55,8 @@ export function GameCard({ data }: { data: any }) {
       position="relative"
     >
       <Image
-        src={dummy.imageUrl}
-        alt={dummy.label}
+        src={data.imageUrl}
+        alt={data.label}
         width={115}
         height={115}
         className="absolute top-0 rounded"
@@ -77,11 +70,58 @@ export function GameCard({ data }: { data: any }) {
         height="100px"
       >
         <Text size="1" className="max-w-[100px] truncate" weight="bold" my="1">
-          {dummy.label}
+          {data.label}
         </Text>
         <Text size="1" className="opacity-50">
-          {dummy.developer}
+          {data.developer}
         </Text>
+      </Flex>
+    </Flex>
+  );
+}
+
+export function OrderCard({ data }: { data: any }) {
+  return (
+    <Flex
+      className="bg-item rounded-xl"
+      gap="4"
+      p="4"
+      align="center"
+      justify="between"
+    >
+      <Image src={data.imageUrl} alt={data.gameName} width={40} height={40} />
+      <Flex direction="column">
+        <Text size="2" className="opacity-50">
+          {data.gameName}
+        </Text>
+        <Text size="2">{data.details}</Text>
+      </Flex>
+      <Flex direction="column">
+        <Text size="2" className="opacity-50">
+          Harga Produk
+        </Text>
+        <Text size="2">{data.price}</Text>
+      </Flex>
+      <Flex direction="column">
+        <Text size="2" className="opacity-50">
+          Metode Pembayaran
+        </Text>
+        <Text size="2">{data.payment}</Text>
+      </Flex>
+      <Flex direction="column">
+        <Text size="2" className="opacity-50">
+          Tanggal
+        </Text>
+        <Text size="2">{data.date}</Text>
+      </Flex>
+      <Flex direction="column">
+        <Box
+          py="2"
+          px="5"
+          className="text-[#95BF00] bg-[#95BF0020] text-sm rounded-md font-medium"
+        >
+          {data.status}
+        </Box>
       </Flex>
     </Flex>
   );

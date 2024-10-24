@@ -5,15 +5,23 @@ import { useState, useEffect } from "react";
 import useStore from "../utils/store";
 
 import Container from "@/components/extras/Container";
-import Banner from "@/components/Banner";
+import HomeBanner from "@/components/HomeBanner";
 import { GameCard } from "@/components/extras/Card";
-import { Grid, Box, Flex, Heading } from "@radix-ui/themes";
+import { Grid, Flex, Heading } from "@radix-ui/themes";
+
+import MoleIcon from "@/assets/ml_icon.jpg";
+
+const dummyProduct = {
+  imageUrl: MoleIcon,
+  label: "Mobile Legend Bang-Bang",
+  developer: "Montoon",
+};
+
+const dummyList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 export default function Home() {
   const { products, getProducts } = useStore();
   const [category, setCategory] = useState("Rekomendasi");
-
-  const dummy = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   useEffect(() => {
     getProducts();
@@ -21,7 +29,7 @@ export default function Home() {
 
   return (
     <main className="overflow-x-hidden text-white bg-bg">
-      <Banner />
+      <HomeBanner />
       <Container>
         <Heading size="7" mt="9" mb="5">
           Temukan Game Favorit
@@ -62,8 +70,8 @@ export default function Home() {
             </Flex>
           </Flex>
           <Flex wrap="wrap" gap="4">
-            {dummy.map((product, index) => (
-              <GameCard data={product} key={index} />
+            {dummyList.map((product, index) => (
+              <GameCard data={dummyProduct} key={index} />
             ))}
           </Flex>
         </Grid>

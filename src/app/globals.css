@@ -20,6 +20,10 @@
   box-shadow: none !important;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);

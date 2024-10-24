@@ -44,7 +44,7 @@ export default function Navbar() {
             </Flex>
             <Box className="min-w-[50dvw]">
               <InputField
-                type="text"
+                capsule={true}
                 value={search}
                 handler={setSearch}
                 icon={<IoSearch />}

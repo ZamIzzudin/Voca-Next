@@ -14,58 +14,16 @@ import WaveDark from "@/assets/wave_dark.svg";
 import WaveLight from "@/assets/wave_light.svg";
 import MoleIcon from "@/assets/ml_icon.jpg";
 
-export default function Banner() {
-  const dummy = [
-    {
-      label: "100 Diamonds",
-      gameName: "Mobile Legends Bang Bang",
-      discountPercentage: 10,
-      imageUrl: MoleIcon,
-    },
-    {
-      label: "100 Diamonds",
-      gameName: "Mobile Legends Bang Bang",
-      discountPercentage: 10,
-      imageUrl: MoleIcon,
-    },
-    {
-      label: "100 Diamonds",
-      gameName: "Mobile Legends Bang Bang",
-      discountPercentage: 10,
-      imageUrl: MoleIcon,
-    },
-    {
-      label: "100 Diamonds",
-      gameName: "Mobile Legends Bang Bang",
-      discountPercentage: 10,
-      imageUrl: MoleIcon,
-    },
-    {
-      label: "100 Diamonds",
-      gameName: "Mobile Legends Bang Bang",
-      discountPercentage: 10,
-      imageUrl: MoleIcon,
-    },
-    {
-      label: "100 Diamonds",
-      gameName: "Mobile Legends Bang Bang",
-      discountPercentage: 10,
-      imageUrl: MoleIcon,
-    },
-    {
-      label: "100 Diamonds",
-      gameName: "Mobile Legends Bang Bang",
-      discountPercentage: 10,
-      imageUrl: MoleIcon,
-    },
-    {
-      label: "100 Diamonds",
-      gameName: "Mobile Legends Bang Bang",
-      discountPercentage: 10,
-      imageUrl: MoleIcon,
-    },
-  ];
+const dummyPromo = {
+  label: "100 Diamonds",
+  gameName: "Mobile Legends Bang Bang",
+  discountPercentage: 10,
+  imageUrl: MoleIcon,
+};
 
+const dummyList = [1, 2, 3, 4, 5, 6, 7, 8];
+
+export default function HomeBanner() {
   return (
     <section className="relative bg-gradient-to-r from-purple-800 to-blue-600 py-16 text-white">
       <BannerSlider />
@@ -90,8 +48,8 @@ export default function Banner() {
           </Text>
         </Box>
         <Flex gap="4" wrap="wrap">
-          {dummy.map((item) => (
-            <BannerCard data={item} />
+          {dummyList.map((item) => (
+            <BannerCard data={dummyPromo} />
           ))}
         </Flex>
       </Container>

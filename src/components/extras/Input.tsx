@@ -2,25 +2,55 @@
 
 import { Box, Flex, Select } from "@radix-ui/themes";
 import { ReactElement, useState } from "react";
-import Image from "next/image";
 
-interface InputState {
-  type: string;
-  placeholder: string;
-  icon: ReactElement | null;
+interface RequiredState {
   value: string | number;
-  handler: (value: string) => void;
+  handler: (value: any) => void;
 }
 
+interface OpsionalState {
+  type: string;
+  placeholder: string;
+  icon: null | ReactElement;
+  capsule: boolean;
+  size: string;
+  action: null | {
+    label: string;
+    handler: () => void;
+  };
+}
+
+interface InputState extends RequiredState, OpsionalState {}
+
+const defaultState: OpsionalState = {
+  type: "text",
+  placeholder: "",
+  icon: null,
+  capsule: false,
+  size: "sm",
+  action: null,
+};
+
+InputField.defaultProps = defaultState;
+
 export function InputField({
-  type = "text",
-  placeholder = "",
-  icon = null,
+  type,
+  placeholder,
+  icon,
   value,
   handler,
+  capsule,
+  size,
+  action,
 }: InputState) {
   return (
-    <Box className="flex items-center justify-start gap-4 min-w-[100%] bg-form px-3 py-2 rounded-full">
+    <Box
+      className={`flex items-center justify-start gap-4 min-w-[100%] bg-form rounded-${
+        capsule ? "full" : "xl"
+      } ${
+        size === "sm" ? "text-md  px-3 py-2" : "text-2xl  px-4 py-4"
+      } relative`}
+    >
       {icon && icon}
       <input
         type={type}
@@ -29,6 +59,14 @@ export function InputField({
         onChange={(e) => handler(e.target.value)}
         className="bg-transparent outline-none text-sm w-[100%]"
       />
+      {action && (
+        <button
+          className="text-sm flex bg-white text-bg absolute right-0 top-0 bottom-0 justify-center items-center px-4 rounded-r-xl"
+          onClick={() => action.handler()}
+        >
+          {action.label}
+        </button>
+      )}
     </Box>
   );
 }
